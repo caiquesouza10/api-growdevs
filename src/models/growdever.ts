@@ -1,9 +1,14 @@
+import { v4 as createUuid } from 'uuid';
+
 export class Growdev {
+  private _id: string;
+
   constructor(
-    private _id: string,
     private _nome: string,
     private _idade: number
-  ) {}
+  ) {
+    this._id = createUuid();
+  }
 
   public get id() {
     return this._id;
