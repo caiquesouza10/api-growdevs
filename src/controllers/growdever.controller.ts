@@ -5,6 +5,58 @@ import { Growdev } from "../models/growdever";
 
 //classe que engloba so metodos 
 export class GrowdeverController {
+
+    public listar(req: Request, res: Response){
+        try {
+            const { idade } = req.query;
+    
+            let result = growdeversDb;
+    
+            if(idade){
+                result = growdeversDb.filter(growdever => growdever.idade === Number(idade));
+            }
+    
+            return res.status(200).send({
+                ok: true,
+                message: 'Growdevers were successfully listed',
+                data: result.map((growdever) => growdever.toJson())
+            });
+    
+        } catch (error: any) {
+            return res.status(500).send({
+                ok: false,
+                message: error.toString()
+            });
+        }
+    }
+
+    public get(req: Request, res: Response){
+        try {
+            const { id } = req.params;
+    
+            const result = growdeversDb.find(growdever => growdever.id === id);
+    
+            if(!result){
+                return res.status(404).send({
+                    ok: false,
+                    message: "Growdever was not found"
+                });
+            }
+            
+            return res.status(200).send({
+                ok: true,
+                message: 'Growdevers was successfully obtained',
+                data: result?.toJson()
+            });
+    
+        } catch (error: any) {
+            return res.status(500).send({
+                ok: false,
+                message: error.toString()
+            });
+        }
+    }
+
     public create(req: Request, res: Response){
         try {
             const {id, nome, idade} = req.body;
