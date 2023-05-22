@@ -82,6 +82,11 @@ app.post('/growdever', (req: Request, res: Response) => {
 // app.post('/growdever', new GrowdeverController().create);
 
 
+app.delete("/growdever/:id", new GrowdeverController().delete);
+
+app.put("/growdever/:id", new GrowdeverController().update);
+
+
 app.listen(3333, () => {
   console.log(`API Está rodando`);
 });
