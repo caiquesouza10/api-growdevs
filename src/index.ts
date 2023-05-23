@@ -9,5 +9,3 @@ app.use("/growdever",growderverRoutes());
 app.listen(3333, () => {
   console.log(`API Está rodando`);
 });
-
-

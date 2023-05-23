@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { GrowdeverController } from "../controllers/growdever.controller";
+import { skillRoutes } from "./skill.routes";
 
 export const growderverRoutes = () => {
   const app = Router();
@@ -24,6 +25,8 @@ export const growderverRoutes = () => {
   app.delete("/:id", new GrowdeverController().delete);
   
   app.put("/:id", new GrowdeverController().update);
+
+  app.use("/:id/skill", skillRoutes());
 
   return app;
 };
