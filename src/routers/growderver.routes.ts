@@ -6,12 +6,12 @@ export const growderverRoutes = () => {
   const app = Router();
 
   //listar Growdevers
-  //GET http://localhost:3333/growdever?idade=20
+  //GET http://localhost:3333/growdever
   app.get("/", new GrowdeverController().listar);
 
   //Obter Growdevers por ID
   //GET http://localhost:3333/growdever/1
-  app.get("/:id", new GrowdeverController().get);
+  app.get("/:id", new GrowdeverController().listarPorId);
 
   //Criar um Growdever
   //POST http://localhost:3333/growdever
@@ -26,6 +26,9 @@ export const growderverRoutes = () => {
   
   app.put("/:id", new GrowdeverController().update);
 
+
+  // coloco isso pois a skill faz parte de um growdever ai o prefixo vai ficar o mesmo 
+  //porem tenho que chamar aqui, ai ele direciona para a skill router
   app.use("/:id/skill", skillRoutes());
 
   return app;

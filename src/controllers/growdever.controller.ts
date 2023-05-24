@@ -30,7 +30,7 @@ export class GrowdeverController {
         }
     }
 
-    public get(req: Request, res: Response){
+    public listarPorId(req: Request, res: Response){
         try {
             const { id } = req.params;
     
@@ -110,7 +110,7 @@ export class GrowdeverController {
             return res.status(200).send({
                 ok: true,
                 message:"Growdever was successfully deleted",
-                data: deleteGrowdevers[0].toJson(),
+                data: deleteGrowdevers[0].toJson(),  // mostra todos os growdevers deletado
             })
             
         } catch (error:any) {
@@ -140,7 +140,7 @@ export class GrowdeverController {
 
             return res.status(200).send({
                 ok: true,
-                message: "Growdever was successfully atualizado",
+                message: "Growdever was successfully update",
                 data: growdever.toJson()
             })
             

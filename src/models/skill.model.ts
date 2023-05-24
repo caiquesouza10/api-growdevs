@@ -11,6 +11,11 @@ export class Skill {
         return this._id;
     }
 
+    public set nome(nome: string){
+        this._nome = nome
+    }
+
+
     public toJson() {
         return {
             id: this._id,

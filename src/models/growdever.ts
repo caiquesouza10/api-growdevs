@@ -1,14 +1,11 @@
-import { v4 as createUuid } from 'uuid';
+import { v4 as createUuid } from "uuid";
 import { Skill } from "./skill.model";
 
 export class Growdev {
   private _id: string;
   private _skills: Skill[];
 
-  constructor(
-    private _nome: string,
-    private _idade: number
-  ) {
+  constructor(private _nome: string, private _idade: number) {
     this._id = createUuid();
     this._skills = [];
   }
@@ -26,18 +23,19 @@ export class Growdev {
   }
 
   public set idade(idade: number) {
-    this._idade = idade
+    this._idade = idade;
   }
 
   public get skills() {
     return this._skills;
-}
+  }
+
 
   public toJson() {
     return {
-        id: this._id,
-        nome: this._nome,
-        idade: this._idade
-    }
+      id: this._id,
+      nome: this._nome,
+      idade: this._idade,
+    };
   }
 }
