@@ -120,10 +120,6 @@ export class SkillController {
 
       const growdever = growdeversDb.find((growdever) => growdever.id === id);
 
-    //   const skill = growdever?.skills.find(item => item.id === skillId);
-
-    //   skill.nome = nome
-
       if (!growdever) {
         return res.status(404).send({
           ok: false,
@@ -131,11 +127,11 @@ export class SkillController {
         });
       }
 
-      const skillIndex = growdever.skills.findIndex(
+      const skillIndex = growdever.skills.find(
         (skill) => skill.id === skillId
       );
 
-      if (skillIndex < 0) {
+      if (!skillIndex) {
         return res.status(404).send({
           ok: false,
           message: "Skill was not found",
@@ -143,6 +139,8 @@ export class SkillController {
       }
 
       //logica para atualizar a skill vai aqui...
+
+      skillIndex.nome = nome
 
       
       
