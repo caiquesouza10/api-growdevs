@@ -161,44 +161,5 @@ export class SkillController {
       });
     }
   }
-  // public atualizar(req: Request, res: Response){
-  //     try {
-  //         const { id, skillId } = req.params;
-  //         const { nome } = req.body;
-
-  //         const growdever = growdeversDb.find(growdever => growdever.id === id);
-
-  //         if(!growdever){
-  //             return res.status(404).send({
-  //                 ok: false,
-  //                 message: "Growdever was not found"
-  //             });
-  //         };
-
-  //         const skillIndex = growdever.skills.findIndex(
-  //             (skill) => skill.id === skillId
-  //         );
-
-  //         if (skillIndex < 0) {
-  //             return res.status(404).send({
-  //                 ok: false,
-  //                 message: "Skill was not found",
-  //             });
-  //         }
-
-  //         growdever.skills = nome;
-
-  //         return res.status(200).send({
-  //             ok: true,
-  //             message: "Skill was successfully update",
-  //             data: growdever.toJson()
-  //         })
-
-  //     } catch (error:any) {
-  //         return res.status(500).send({
-  //             ok: false,
-  //             message: error.toString()
-  //         });
-  //     }
-  // }
+  
 }
