@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Skill } from "../models/skill.model";
 import { growdeversDb } from "../database/growdeversDb";
+import { HttpResponse } from "../util/http-response.adapter";
 
 export class SkillController {
   public listarPorId(req: Request, res: Response) {
@@ -9,10 +10,7 @@ export class SkillController {
 
       const growdever = growdeversDb.find((growdever) => growdever.id === id);
       if (!growdever) {
-        return res.status(404).send({
-          ok: false,
-          message: "Growdever was not found",
-        });
+        return HttpResponse.notFound(res, "Growdever");
       }
 
       return res.status(200).send({
@@ -49,10 +47,7 @@ export class SkillController {
 
       const growdever = growdeversDb.find((growdever) => growdever.id === id);
       if (!growdever) {
-        return res.status(404).send({
-          ok: false,
-          message: "Growdever was not found",
-        });
+        return HttpResponse.notFound(res, "Growdever");
       }
 
       const skill = new Skill(nome, isActive);
@@ -79,10 +74,7 @@ export class SkillController {
       const growdever = growdeversDb.find((growdever) => growdever.id === id);
 
       if (!growdever) {
-        return res.status(404).send({
-          ok: false,
-          message: "Growdever was not found",
-        });
+        return HttpResponse.notFound(res, "Growdever");
       }
 
       const skillIndex = growdever.skills.findIndex(
@@ -90,10 +82,7 @@ export class SkillController {
       );
 
       if (skillIndex < 0) {
-        return res.status(404).send({
-          ok: false,
-          message: "Skill was not found",
-        });
+        return HttpResponse.notFound(res, "Skill");
       }
 
       const deletedSkills = growdever.skills.splice(skillIndex, 1);
@@ -116,15 +105,12 @@ export class SkillController {
     try {
       const { id, skillId } = req.params;
 
-      const { nome } = req.body;
+      const { nome, isActive } = req.body;
 
       const growdever = growdeversDb.find((growdever) => growdever.id === id);
 
       if (!growdever) {
-        return res.status(404).send({
-          ok: false,
-          message: "Growdever was not found",
-        });
+        return HttpResponse.notFound(res, "Growdever");
       }
 
       const skillIndex = growdever.skills.find(
@@ -132,30 +118,25 @@ export class SkillController {
       );
 
       if (!skillIndex) {
-        return res.status(404).send({
-          ok: false,
-          message: "Skill was not found",
-        });
+        return HttpResponse.notFound(res, "Skill");
       }
 
-      //logica para atualizar a skill vai aqui...
+      if(nome){
+        skillIndex.nome = String(nome)
+      }
 
-      skillIndex.nome = nome
-
+      if(isActive !== undefined){
+        skillIndex.isActive = Boolean(isActive)
+      }
       
-      
 
-      return res.status(200).send({
-        ok: true,
-        message: "Skill was successfully update",
-        data: growdever.toJson(),
-      });
+      return HttpResponse.success(res, "skill", growdever.toJson());
+
 
     } catch (error: any) {
       return res.status(500).send({
         ok: false,
-        message:
-          "Nossos servidores estão com problema, tente novamente mais tarde.",
+        message:error.toString(),
       });
     }
   }

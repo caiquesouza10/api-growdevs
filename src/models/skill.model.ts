@@ -15,6 +15,10 @@ export class Skill {
         this._nome = nome
     }
 
+    public set isActive(isActive: boolean){
+        this._isActive = isActive
+    }
+
 
     public toJson() {
         return {
